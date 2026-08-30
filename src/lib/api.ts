@@ -7,14 +7,19 @@ import {
   MOCK_SCRAPE_RESPONSE,
 } from './mockData'
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
+export const getApiBaseUrl = (): string => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL
+  }
+  return 'http://localhost:8000'
+}
 
 class APIClient {
   public client: AxiosInstance
 
   constructor() {
     this.client = axios.create({
-      baseURL: API_BASE_URL,
+      baseURL: getApiBaseUrl(),
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +31,11 @@ class APIClient {
 
   private setupInterceptors() {
     this.client.interceptors.request.use((config) => {
+      // Dynamically resolve base URL on each request to ensure production env variable is respected
+      const activeBaseUrl = getApiBaseUrl()
+      if (activeBaseUrl) {
+        config.baseURL = activeBaseUrl
+      }
       if (typeof window !== 'undefined') {
         const token = localStorage.getItem('access_token')
         if (token) {

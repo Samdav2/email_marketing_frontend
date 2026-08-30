@@ -12,12 +12,25 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Pass Railway build arguments to Next.js build step
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_APP_NAME
+
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}
+
 ENV NEXT_TELEMETRY_DISABLED 1
 RUN npm run build
 
 # 3. Production image, copy all files and run next
 FROM node:20-alpine AS runner
 WORKDIR /app
+
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_APP_NAME
+
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_APP_NAME=${NEXT_PUBLIC_APP_NAME}
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
