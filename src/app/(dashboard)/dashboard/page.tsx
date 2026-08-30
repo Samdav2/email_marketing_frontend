@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { StatCard } from '@/components/common/StatCard'
 import {
@@ -10,12 +10,7 @@ import {
   Send,
   Zap,
   ArrowRight,
-  Sparkles,
   CheckCircle2,
-  TrendingUp,
-  Clock,
-  Download,
-  Flame,
   Globe,
 } from 'lucide-react'
 import { useEmailStore } from '@/store/emailStore'
@@ -47,12 +42,10 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       {/* Welcome Banner */}
-      <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-blue-500/20 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-
+      <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-blue-500/20 relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 bg-slate-900">
         <div className="space-y-2 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold">
-            <Sparkles className="w-3.5 h-3.5" /> LeadFlow UK Intelligence Console
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 text-xs font-bold whitespace-nowrap">
+            <CheckCircle2 className="w-3.5 h-3.5" /> LeadFlow UK Intelligence Console
           </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Welcome back, {user?.name || 'Alex'} 👋
@@ -65,7 +58,7 @@ export default function DashboardPage() {
         <div className="flex items-center gap-3 shrink-0 relative z-10">
           <Link
             href="/scrape"
-            className="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg shadow-blue-500/25 transition-all flex items-center gap-2"
+            className="px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap"
           >
             <Zap className="w-4 h-4 fill-current" />
             Open Scraper Console
@@ -82,7 +75,6 @@ export default function DashboardPage() {
           isPositive={true}
           description="Verified UK business emails"
           icon={Mail}
-          color="blue"
         />
         <StatCard
           title="Active Templates"
@@ -91,25 +83,22 @@ export default function DashboardPage() {
           isPositive={true}
           description="HTML & plain-text layouts"
           icon={FileCode}
-          color="cyan"
         />
         <StatCard
           title="UK Domains Scraped"
           value="1,250+"
           change="+18 today"
           isPositive={true}
-          description="Indexed via CDX Common Crawl"
+          description="Indexed via UK Business Web Search"
           icon={Globe}
-          color="purple"
         />
         <StatCard
           title="Deliverability Rate"
           value="98.2%"
           change="+1.5%"
           isPositive={true}
-          description="Optimized SMTP batch dispatch"
+          description="Optimized batch dispatch"
           icon={Send}
-          color="emerald"
         />
       </div>
 
@@ -120,14 +109,14 @@ export default function DashboardPage() {
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Database className="w-5 h-5 text-cyan-400" />
+                <Database className="w-5 h-5 text-blue-400" />
                 Quick UK Domain Scraper Launcher
               </h3>
               <p className="text-xs text-gray-400">Discover and auto-save UK business leads directly to database</p>
             </div>
-            <span className="px-2.5 py-1 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              CDX Ready
+            <span className="px-2.5 py-1 text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-full flex items-center gap-1.5 whitespace-nowrap">
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
+              Engine Online
             </span>
           </div>
 
@@ -180,7 +169,7 @@ export default function DashboardPage() {
               <button
                 type="submit"
                 disabled={isScraping}
-                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-extrabold text-sm shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/35 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
               >
                 <Zap className={`w-4 h-4 fill-current ${isScraping ? 'animate-bounce' : ''}`} />
                 {isScraping ? 'Scraping UK Domains in Parallel...' : 'Start UK Scrape Operation'}
@@ -191,7 +180,7 @@ export default function DashboardPage() {
           {/* Lead Database Preview bar */}
           <div className="pt-4 border-t border-white/10 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-sm">
+              <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold text-sm">
                 {emails.length || 18}
               </div>
               <div>
@@ -204,7 +193,7 @@ export default function DashboardPage() {
 
             <Link
               href="/emails"
-              className="text-xs font-bold text-cyan-400 hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-blue-400 hover:underline flex items-center gap-1 whitespace-nowrap"
             >
               View Full Database <ArrowRight className="w-3.5 h-3.5" />
             </Link>
@@ -215,10 +204,10 @@ export default function DashboardPage() {
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
-              <FileCode className="w-5 h-5 text-purple-400" />
+              <FileCode className="w-5 h-5 text-blue-400" />
               Template Library
             </h3>
-            <Link href="/templates" className="text-xs text-purple-400 hover:underline font-semibold">
+            <Link href="/templates" className="text-xs text-blue-400 hover:underline font-semibold whitespace-nowrap">
               Manage
             </Link>
           </div>
@@ -227,19 +216,19 @@ export default function DashboardPage() {
             {templates.slice(0, 3).map((tpl) => (
               <div
                 key={tpl.id}
-                className="p-3.5 rounded-2xl glass-card border border-white/5 hover:border-purple-500/30 transition-all flex items-center justify-between group"
+                className="p-3.5 rounded-2xl glass-card border border-white/5 hover:border-blue-500/30 transition-all flex items-center justify-between group"
               >
                 <div>
-                  <p className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">
+                  <p className="text-xs font-bold text-white group-hover:text-blue-400 transition-colors">
                     {tpl.name}
                   </p>
-                  <span className="px-2 py-0.5 text-[10px] font-bold bg-purple-500/10 text-purple-400 rounded-md border border-purple-500/20 uppercase mt-1 inline-block">
+                  <span className="px-2 py-0.5 text-[10px] font-bold bg-blue-600/20 text-blue-400 rounded-md border border-blue-500/30 uppercase mt-1 inline-block">
                     {tpl.template_type}
                   </span>
                 </div>
                 <Link
                   href={`/campaigns?templateId=${tpl.id}`}
-                  className="p-2 rounded-xl bg-purple-500/10 text-purple-400 hover:bg-purple-500/20 transition-colors"
+                  className="p-2 rounded-xl bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 transition-colors whitespace-nowrap"
                   title="Use in Campaign"
                 >
                   <Send className="w-4 h-4" />
@@ -250,7 +239,7 @@ export default function DashboardPage() {
 
           <Link
             href="/campaigns"
-            className="w-full py-3 rounded-xl glass-panel hover:bg-white/10 border border-white/10 text-xs font-bold text-center block text-white transition-colors"
+            className="w-full py-3 rounded-xl glass-panel hover:bg-white/10 border border-white/10 text-xs font-bold text-center block text-white transition-colors whitespace-nowrap"
           >
             Create New Campaign
           </Link>
@@ -259,3 +248,4 @@ export default function DashboardPage() {
     </div>
   )
 }
+

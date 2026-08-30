@@ -1,17 +1,24 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Mail, Lock, Loader2, ArrowRight, CheckCircle2 } from 'lucide-react'
+import { Mail, Lock, Loader2, ArrowRight } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import toast from 'react-hot-toast'
 
 export const LoginForm = () => {
   const [email, setEmail] = useState('alex.mercer@leadflow.uk')
   const [password, setPassword] = useState('SecurePass123!')
-  const { login, isLoading, error, clearError } = useAuthStore()
+  const { login, token, isLoading, error, clearError } = useAuthStore()
   const router = useRouter()
+
+  useEffect(() => {
+    const storedToken = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null
+    if (token || storedToken) {
+      router.replace('/dashboard')
+    }
+  }, [token, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,10 +34,8 @@ export const LoginForm = () => {
 
   return (
     <div className="w-full max-w-md mx-auto glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
-
       <div className="text-center mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 mx-auto flex items-center justify-center glow-blue mb-3">
+        <div className="w-12 h-12 rounded-2xl bg-blue-600 mx-auto flex items-center justify-center mb-3">
           <Mail className="w-6 h-6 text-white" />
         </div>
         <h2 className="text-2xl font-extrabold text-white">Welcome Back</h2>
@@ -60,7 +65,7 @@ export const LoginForm = () => {
             <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider">
               Password
             </label>
-            <span className="text-xs text-cyan-400 hover:underline cursor-pointer">Forgot password?</span>
+            <span className="text-xs text-blue-400 font-semibold hover:underline cursor-pointer">Forgot password?</span>
           </div>
           <div className="relative">
             <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
@@ -84,7 +89,7 @@ export const LoginForm = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+          className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm transition-all flex items-center justify-center gap-2 group disabled:opacity-50 whitespace-nowrap"
         >
           {isLoading ? (
             <>
@@ -103,7 +108,7 @@ export const LoginForm = () => {
       <div className="mt-8 pt-6 border-t border-white/10 text-center">
         <p className="text-xs text-gray-400">
           Don't have an account yet?{' '}
-          <Link href="/signup" className="text-cyan-400 font-bold hover:underline">
+          <Link href="/signup" className="text-blue-400 font-bold hover:underline">
             Create account
           </Link>
         </p>
@@ -111,3 +116,4 @@ export const LoginForm = () => {
     </div>
   )
 }
+

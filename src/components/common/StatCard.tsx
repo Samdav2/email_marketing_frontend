@@ -7,7 +7,7 @@ interface StatCardProps {
   isPositive?: boolean
   description?: string
   icon: LucideIcon
-  color: 'blue' | 'cyan' | 'purple' | 'emerald' | 'amber'
+  color?: 'blue' | 'cyan' | 'purple' | 'emerald' | 'amber'
 }
 
 export const StatCard = ({
@@ -17,50 +17,16 @@ export const StatCard = ({
   isPositive = true,
   description,
   icon: Icon,
-  color,
 }: StatCardProps) => {
-  const colorStyles = {
-    blue: {
-      bg: 'bg-blue-500/10',
-      border: 'border-blue-500/20',
-      iconBg: 'bg-blue-500/20 text-blue-400',
-      glow: 'hover:border-blue-500/40 hover:shadow-blue-500/10',
-    },
-    cyan: {
-      bg: 'bg-cyan-500/10',
-      border: 'border-cyan-500/20',
-      iconBg: 'bg-cyan-500/20 text-cyan-400',
-      glow: 'hover:border-cyan-500/40 hover:shadow-cyan-500/10',
-    },
-    purple: {
-      bg: 'bg-purple-500/10',
-      border: 'border-purple-500/20',
-      iconBg: 'bg-purple-500/20 text-purple-400',
-      glow: 'hover:border-purple-500/40 hover:shadow-purple-500/10',
-    },
-    emerald: {
-      bg: 'bg-emerald-500/10',
-      border: 'border-emerald-500/20',
-      iconBg: 'bg-emerald-500/20 text-emerald-400',
-      glow: 'hover:border-emerald-500/40 hover:shadow-emerald-500/10',
-    },
-    amber: {
-      bg: 'bg-amber-500/10',
-      border: 'border-amber-500/20',
-      iconBg: 'bg-amber-500/20 text-amber-400',
-      glow: 'hover:border-amber-500/40 hover:shadow-amber-500/10',
-    },
-  }[color]
-
   return (
-    <div className={`glass-card p-6 rounded-2xl border transition-all ${colorStyles.border} ${colorStyles.glow}`}>
+    <div className="glass-card p-6 rounded-2xl border border-white/10 hover:border-blue-500/40 transition-all bg-slate-900/60">
       <div className="flex items-center justify-between mb-4">
-        <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold ${colorStyles.iconBg}`}>
+        <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold bg-blue-600/20 text-blue-400">
           <Icon className="w-6 h-6" />
         </div>
         {change && (
           <div
-            className={`flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full ${
+            className={`flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap ${
               isPositive
                 ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
                 : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
@@ -80,3 +46,4 @@ export const StatCard = ({
     </div>
   )
 }
+

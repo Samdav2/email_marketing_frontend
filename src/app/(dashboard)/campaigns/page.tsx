@@ -99,11 +99,11 @@ function CampaignContent() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 glass-panel p-6 rounded-3xl border border-white/10">
         <div>
           <h2 className="text-2xl font-extrabold text-white flex items-center gap-3">
-            <Send className="w-6 h-6 text-indigo-400" />
+            <Send className="w-6 h-6 text-blue-400" />
             Bulk Campaign Mailer Center
           </h2>
           <p className="text-xs text-gray-400 mt-1">
-            Dispatch personalized outreach emails in optimized 10-recipient batches with SMTP logging.
+            Dispatch personalized outreach emails in optimized batches with delivery tracking.
           </p>
         </div>
       </div>
@@ -112,7 +112,7 @@ function CampaignContent() {
         {/* Campaign Configuration Form (2 Cols) */}
         <div className="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
           <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-4">
-            <Zap className="w-5 h-5 text-indigo-400" />
+            <Zap className="w-5 h-5 text-blue-400" />
             Campaign Parameters & Dispatcher
           </h3>
 
@@ -136,9 +136,9 @@ function CampaignContent() {
               </select>
 
               {selectedTemplate && (
-                <div className="mt-3 p-3.5 rounded-xl bg-slate-900/60 border border-white/5 text-xs space-y-1">
+                <div className="mt-3 p-3.5 rounded-xl bg-slate-900 border border-white/5 text-xs space-y-1">
                   <p className="text-gray-400 font-semibold">Subject Preview:</p>
-                  <p className="text-cyan-300 font-mono">{selectedTemplate.subject}</p>
+                  <p className="text-blue-400 font-mono">{selectedTemplate.subject}</p>
                 </div>
               )}
             </div>
@@ -153,9 +153,9 @@ function CampaignContent() {
                 <button
                   type="button"
                   onClick={() => setRecipientSource('DATABASE')}
-                  className={`p-4 rounded-2xl border text-left transition-all ${
+                  className={`p-4 rounded-2xl border text-left transition-all whitespace-nowrap ${
                     recipientSource === 'DATABASE'
-                      ? 'bg-indigo-500/20 border-indigo-500/50 text-white'
+                      ? 'bg-blue-600/20 border-blue-500/50 text-white font-bold'
                       : 'glass-card border-white/5 text-gray-400 hover:text-white'
                   }`}
                 >
@@ -166,9 +166,9 @@ function CampaignContent() {
                 <button
                   type="button"
                   onClick={() => setRecipientSource('CUSTOM')}
-                  className={`p-4 rounded-2xl border text-left transition-all ${
+                  className={`p-4 rounded-2xl border text-left transition-all whitespace-nowrap ${
                     recipientSource === 'CUSTOM'
-                      ? 'bg-indigo-500/20 border-indigo-500/50 text-white'
+                      ? 'bg-blue-600/20 border-blue-500/50 text-white font-bold'
                       : 'glass-card border-white/5 text-gray-400 hover:text-white'
                   }`}
                 >
@@ -228,7 +228,7 @@ function CampaignContent() {
             <button
               type="submit"
               disabled={isSending}
-              className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-extrabold text-sm shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-4 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
             >
               {isSending ? (
                 <>
@@ -248,7 +248,7 @@ function CampaignContent() {
         {/* Campaign Execution Results Log (1 Col) */}
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
           <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-4">
-            <BarChart className="w-5 h-5 text-cyan-400" />
+            <BarChart className="w-5 h-5 text-blue-400" />
             Dispatch Live Report
           </h3>
 
@@ -306,3 +306,4 @@ export default function CampaignsPage() {
     </Suspense>
   )
 }
+

@@ -1,9 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { User as UserIcon, Mail, Lock, Loader2, ArrowRight, Sparkles } from 'lucide-react'
+import { User as UserIcon, Mail, Lock, Loader2, ArrowRight } from 'lucide-react'
 import { useAuthStore } from '@/store/authStore'
 import toast from 'react-hot-toast'
 
@@ -11,8 +11,15 @@ export const SignupForm = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { signup, isLoading, error, clearError } = useAuthStore()
+  const { signup, token, isLoading, error, clearError } = useAuthStore()
   const router = useRouter()
+
+  useEffect(() => {
+    const storedToken = typeof window !== 'undefined' ? localStorage.getItem('access_token') : null
+    if (token || storedToken) {
+      router.replace('/dashboard')
+    }
+  }, [token, router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,11 +39,9 @@ export const SignupForm = () => {
 
   return (
     <div className="w-full max-w-md mx-auto glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
-
       <div className="text-center mb-8">
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 mx-auto flex items-center justify-center glow-cyan mb-3">
-          <Sparkles className="w-6 h-6 text-white" />
+        <div className="w-12 h-12 rounded-2xl bg-blue-600 mx-auto flex items-center justify-center mb-3">
+          <UserIcon className="w-6 h-6 text-white" />
         </div>
         <h2 className="text-2xl font-extrabold text-white">Create LeadFlow Account</h2>
         <p className="text-xs text-gray-400 mt-1">Start discovering UK leads & automated outreach</p>
@@ -104,7 +109,7 @@ export const SignupForm = () => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 mt-2"
+          className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm transition-all flex items-center justify-center gap-2 group disabled:opacity-50 mt-2 whitespace-nowrap"
         >
           {isLoading ? (
             <>
@@ -123,7 +128,7 @@ export const SignupForm = () => {
       <div className="mt-6 pt-6 border-t border-white/10 text-center">
         <p className="text-xs text-gray-400">
           Already have an account?{' '}
-          <Link href="/login" className="text-cyan-400 font-bold hover:underline">
+          <Link href="/login" className="text-blue-400 font-bold hover:underline">
             Sign in
           </Link>
         </p>
@@ -131,3 +136,4 @@ export const SignupForm = () => {
     </div>
   )
 }
+

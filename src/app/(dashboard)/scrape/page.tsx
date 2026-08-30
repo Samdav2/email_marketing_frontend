@@ -1,19 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import {
   Database,
   Play,
-  CheckCircle2,
-  AlertTriangle,
-  RefreshCw,
-  Terminal,
   Download,
   Filter,
   Globe,
   Loader2,
-  Shield,
-  FileText,
+  Terminal,
+  RefreshCw,
 } from 'lucide-react'
 import { useEmailStore } from '@/store/emailStore'
 import { ScrapeToDbResponse, DomainScrapeResult } from '@/types'
@@ -21,7 +17,7 @@ import { downloadCSV } from '@/lib/utils'
 import toast from 'react-hot-toast'
 
 export default function ScrapePage() {
-  const { runScrape, isScraping, lastScrapeResult } = useEmailStore()
+  const { runScrape, isScraping } = useEmailStore()
 
   const [domainLimit, setDomainLimit] = useState(50)
   const [emailLimit, setEmailLimit] = useState(500)
@@ -35,7 +31,7 @@ export default function ScrapePage() {
   const handleStartScrape = async (e: React.FormEvent) => {
     e.preventDefault()
     setLogs([
-      `[${new Date().toLocaleTimeString()}] Initializing UK Domain Discovery Engine via CDX API...`,
+      `[${new Date().toLocaleTimeString()}] Initializing UK Lead Discovery Engine...`,
       `[${new Date().toLocaleTimeString()}] Parameter target: ${domainLimit} domains, max ${emailLimit} emails.`,
     ])
     setProgress(5)
@@ -102,18 +98,18 @@ export default function ScrapePage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 glass-panel p-6 rounded-3xl border border-white/10">
         <div>
           <h2 className="text-2xl font-extrabold text-white flex items-center gap-3">
-            <Database className="w-6 h-6 text-cyan-400" />
+            <Database className="w-6 h-6 text-blue-400" />
             UK Email Scraper Command Center
           </h2>
           <p className="text-xs text-gray-400 mt-1">
-            Automated UK domain discovery via CDX Common Crawl archive with duplicate filtering.
+            Automated UK domain discovery via web archive search with duplicate filtering.
           </p>
         </div>
 
         {scrapeResult && (
           <button
             onClick={handleExportResultsCSV}
-            className="px-4 py-2.5 rounded-xl bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 border border-emerald-500/30 text-xs font-bold transition-all flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-emerald-600/20 text-emerald-400 hover:bg-emerald-600/30 border border-emerald-500/30 text-xs font-bold transition-all flex items-center gap-2 whitespace-nowrap"
           >
             <Download className="w-4 h-4" />
             Export Scrape CSV
@@ -125,7 +121,7 @@ export default function ScrapePage() {
         {/* Scrape Controls Form (1 Col) */}
         <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
           <h3 className="text-base font-bold text-white flex items-center gap-2 border-b border-white/10 pb-4">
-            <Filter className="w-4 h-4 text-cyan-400" />
+            <Filter className="w-4 h-4 text-blue-400" />
             Scraper Configuration
           </h3>
 
@@ -143,7 +139,7 @@ export default function ScrapePage() {
                 required
                 className="w-full glass-input px-4 py-3 rounded-xl text-sm font-semibold"
               />
-              <p className="text-[11px] text-gray-500 mt-1">Number of UK registered domains to crawl.</p>
+              <p className="text-[11px] text-gray-400 mt-1">Number of UK registered domains to crawl.</p>
             </div>
 
             <div>
@@ -159,7 +155,7 @@ export default function ScrapePage() {
                 required
                 className="w-full glass-input px-4 py-3 rounded-xl text-sm font-semibold"
               />
-              <p className="text-[11px] text-gray-500 mt-1">Stops crawling automatically once target is hit.</p>
+              <p className="text-[11px] text-gray-400 mt-1">Stops crawling automatically once target is hit.</p>
             </div>
 
             <div>
@@ -183,12 +179,12 @@ export default function ScrapePage() {
               <button
                 type="submit"
                 disabled={isScraping}
-                className="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white font-extrabold text-sm shadow-xl shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full py-4 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
               >
                 {isScraping ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Crawling CDX Archives...
+                    Crawling Web Archives...
                   </>
                 ) : (
                   <>
@@ -205,9 +201,9 @@ export default function ScrapePage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Progress Bar Panel */}
           {isScraping && (
-            <div className="glass-panel p-6 rounded-3xl border border-cyan-500/30 space-y-3">
+            <div className="glass-panel p-6 rounded-3xl border border-blue-500/30 space-y-3">
               <div className="flex items-center justify-between text-xs font-bold">
-                <span className="text-cyan-400 flex items-center gap-2">
+                <span className="text-blue-400 flex items-center gap-2">
                   <RefreshCw className="w-4 h-4 animate-spin" />
                   Scanning Domain: <span className="text-white">{currentDomain || 'Discovering...'}</span>
                 </span>
@@ -215,7 +211,7 @@ export default function ScrapePage() {
               </div>
               <div className="w-full h-3 rounded-full bg-slate-900 overflow-hidden border border-white/10">
                 <div
-                  className="h-full bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 transition-all duration-300 rounded-full"
+                  className="h-full bg-blue-600 transition-all duration-300 rounded-full"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -224,16 +220,16 @@ export default function ScrapePage() {
 
           {/* Console Output */}
           <div className="glass-panel rounded-3xl border border-white/10 overflow-hidden">
-            <div className="px-6 py-4 bg-slate-950/80 border-b border-white/10 flex items-center justify-between">
+            <div className="px-6 py-4 bg-slate-950 border-b border-white/10 flex items-center justify-between">
               <span className="text-xs font-bold text-gray-300 flex items-center gap-2">
-                <Terminal className="w-4 h-4 text-emerald-400" />
+                <Terminal className="w-4 h-4 text-blue-400" />
                 Live Scrape Console Output
               </span>
-              <span className="text-[10px] font-mono text-gray-500">cdx_resume_state.txt ACTIVE</span>
+              <span className="text-[10px] font-mono text-gray-400">session_log.txt ACTIVE</span>
             </div>
-            <div className="p-6 bg-slate-950/90 font-mono text-xs text-gray-300 h-64 overflow-y-auto space-y-2">
+            <div className="p-6 bg-slate-950 font-mono text-xs text-gray-300 h-64 overflow-y-auto space-y-2">
               {logs.length === 0 ? (
-                <div className="h-full flex items-center justify-center text-gray-600 italic">
+                <div className="h-full flex items-center justify-center text-gray-500 italic">
                   Press 'Execute Scrape Operation' to launch UK domain crawling...
                 </div>
               ) : (
@@ -294,7 +290,7 @@ export default function ScrapePage() {
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-900/60 text-gray-400 uppercase font-bold text-[10px] tracking-wider border-b border-white/10">
+              <thead className="bg-slate-950 text-gray-400 uppercase font-bold text-[10px] tracking-wider border-b border-white/10">
                 <tr>
                   <th className="py-3.5 px-6">Domain</th>
                   <th className="py-3.5 px-6">Status</th>
@@ -307,11 +303,11 @@ export default function ScrapePage() {
                     <td className="py-4 px-6 text-white font-bold">{r.domain}</td>
                     <td className="py-4 px-6">
                       {r.status === 'success' ? (
-                        <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">
+                        <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold whitespace-nowrap">
                           Success
                         </span>
                       ) : (
-                        <span className="px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 text-[10px] font-bold">
+                        <span className="px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20 text-[10px] font-bold whitespace-nowrap">
                           Error
                         </span>
                       )}
@@ -322,7 +318,7 @@ export default function ScrapePage() {
                           {r.emails.map((email, eIdx) => (
                             <span
                               key={eIdx}
-                              className="px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-300 border border-blue-500/20 text-[11px]"
+                              className="px-2 py-0.5 rounded-md bg-blue-600/20 text-blue-300 border border-blue-500/30 text-[11px]"
                             >
                               {email}
                             </span>
@@ -342,3 +338,4 @@ export default function ScrapePage() {
     </div>
   )
 }
+

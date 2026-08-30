@@ -151,7 +151,7 @@ export const MOCK_SCRAPE_RESPONSE: ScrapeToDbResponse = {
       domain: 'failed-domain-example.co.uk',
       emails: [],
       status: 'error',
-      error_message: 'Timeout connecting to CDX archive server',
+      error_message: 'Timeout connecting to web search server',
     },
   ],
 }

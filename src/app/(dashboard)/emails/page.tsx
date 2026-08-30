@@ -11,7 +11,6 @@ import {
   Filter,
   RefreshCw,
   Trash2,
-  Sparkles,
 } from 'lucide-react'
 import { useEmailStore } from '@/store/emailStore'
 import { downloadCSV } from '@/lib/utils'
@@ -114,7 +113,7 @@ export default function EmailsPage() {
               <Mail className="w-6 h-6 text-blue-400" />
               Scraped Email Lead Database
             </h2>
-            <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 font-bold text-xs">
+            <span className="px-3 py-1 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 font-bold text-xs whitespace-nowrap">
               {totalEmails || emails.length} Total Verified
             </span>
           </div>
@@ -127,14 +126,14 @@ export default function EmailsPage() {
           <button
             onClick={() => fetchEmails()}
             disabled={isFetchingEmails}
-            className="p-2.5 rounded-xl bg-slate-800 text-gray-300 hover:text-white border border-white/10 text-xs font-semibold"
+            className="p-2.5 rounded-xl bg-slate-800 text-gray-300 hover:text-white border border-white/10 text-xs font-semibold whitespace-nowrap"
             title="Refresh lead database"
           >
             <RefreshCw className={`w-4 h-4 ${isFetchingEmails ? 'animate-spin' : ''}`} />
           </button>
           <button
             onClick={handleExportCSV}
-            className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-blue-500/20 transition-all flex items-center gap-2"
+            className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all flex items-center gap-2 whitespace-nowrap"
           >
             <Download className="w-4 h-4" />
             Export CSV ({selectedEmails.length > 0 ? selectedEmails.length : 'All'})
@@ -168,7 +167,7 @@ export default function EmailsPage() {
               onClick={() => setActiveCategoryFilter(cat.id)}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                 activeCategoryFilter === cat.id
-                  ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30'
+                  ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40 font-extrabold'
                   : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -182,10 +181,10 @@ export default function EmailsPage() {
       <div className="glass-panel rounded-3xl border border-white/10 overflow-hidden shadow-2xl">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-950/80 text-gray-400 uppercase font-bold text-[10px] tracking-wider border-b border-white/10">
+            <thead className="bg-slate-950 text-gray-400 uppercase font-bold text-[10px] tracking-wider border-b border-white/10">
               <tr>
                 <th className="py-4 px-6 w-12 text-center">
-                  <button onClick={toggleSelectAll} className="text-gray-400 hover:text-white">
+                  <button onClick={toggleSelectAll} className="text-gray-400 hover:text-white whitespace-nowrap">
                     {selectedEmails.length > 0 && selectedEmails.length === filteredEmails.length ? (
                       <CheckSquare className="w-4 h-4 text-blue-400" />
                     ) : (
@@ -215,11 +214,11 @@ export default function EmailsPage() {
                     <tr
                       key={idx}
                       className={`hover:bg-white/5 transition-colors ${
-                        isSelected ? 'bg-blue-500/10' : ''
+                        isSelected ? 'bg-blue-600/10' : ''
                       }`}
                     >
                       <td className="py-3.5 px-6 text-center">
-                        <button onClick={() => toggleSelect(email)} className="text-gray-400 hover:text-white">
+                        <button onClick={() => toggleSelect(email)} className="text-gray-400 hover:text-white whitespace-nowrap">
                           {isSelected ? (
                             <CheckSquare className="w-4 h-4 text-blue-400" />
                           ) : (
@@ -233,14 +232,14 @@ export default function EmailsPage() {
                       </td>
                       <td className="py-3.5 px-6 text-gray-300 font-mono text-[11px]">{domain}</td>
                       <td className="py-3.5 px-6">
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold whitespace-nowrap">
                           Verified Lead
                         </span>
                       </td>
                       <td className="py-3.5 px-6 text-right">
                         <button
                           onClick={() => openSendSingleModal(email)}
-                          className="px-3 py-1.5 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-blue-300 border border-blue-500/20 text-xs font-semibold transition-all inline-flex items-center gap-1.5"
+                          className="px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-semibold transition-all inline-flex items-center gap-1.5 whitespace-nowrap"
                         >
                           <Send className="w-3 h-3" />
                           Send Mail
@@ -281,20 +280,20 @@ export default function EmailsPage() {
             </select>
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-900/60 border border-white/5 text-xs space-y-2">
+          <div className="p-4 rounded-xl bg-slate-900 border border-white/5 text-xs space-y-2">
             <p className="text-gray-400 font-semibold">Dynamic Variables Auto-Filled:</p>
             <p className="text-gray-300 font-mono">
-              recipient_name: <span className="text-cyan-400">{targetEmail.split('@')[0]}</span>
+              recipient_name: <span className="text-blue-400">{targetEmail.split('@')[0]}</span>
             </p>
             <p className="text-gray-300 font-mono">
-              company_name: <span className="text-cyan-400">{targetEmail.split('@')[1]}</span>
+              company_name: <span className="text-blue-400">{targetEmail.split('@')[1]}</span>
             </p>
           </div>
 
           <button
             type="submit"
             disabled={isSending}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
           >
             {isSending ? 'Dispatching...' : 'Confirm & Send Email'}
           </button>
@@ -303,3 +302,4 @@ export default function EmailsPage() {
     </div>
   )
 }
+

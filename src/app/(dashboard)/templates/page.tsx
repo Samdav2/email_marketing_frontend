@@ -7,7 +7,6 @@ import {
   Eye,
   Trash2,
   Send,
-  Sparkles,
   CheckCircle2,
   Code,
   Tag,
@@ -104,7 +103,7 @@ export default function TemplatesPage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 glass-panel p-6 rounded-3xl border border-white/10">
         <div>
           <h2 className="text-2xl font-extrabold text-white flex items-center gap-3">
-            <FileCode className="w-6 h-6 text-purple-400" />
+            <FileCode className="w-6 h-6 text-blue-400" />
             Email Template Studio
           </h2>
           <p className="text-xs text-gray-400 mt-1">
@@ -114,7 +113,7 @@ export default function TemplatesPage() {
 
         <button
           onClick={() => setCreateModalOpen(true)}
-          className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-purple-500/25 transition-all flex items-center gap-2"
+          className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs transition-all flex items-center gap-2 whitespace-nowrap"
         >
           <Plus className="w-4 h-4" />
           Create New Template
@@ -129,7 +128,7 @@ export default function TemplatesPage() {
             onClick={() => setActiveCategory(cat.id)}
             className={`px-4 py-2 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
               activeCategory === cat.id
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-lg shadow-purple-500/10'
+                ? 'bg-blue-600/20 text-blue-400 border border-blue-500/40 font-extrabold'
                 : 'text-gray-400 hover:text-white hover:bg-white/5'
             }`}
           >
@@ -143,11 +142,11 @@ export default function TemplatesPage() {
         {filteredTemplates.map((tpl) => (
           <div
             key={tpl.id}
-            className="glass-card p-6 rounded-3xl border border-white/10 flex flex-col justify-between hover:border-purple-500/40 transition-all space-y-4 group"
+            className="glass-card p-6 rounded-3xl border border-white/10 flex flex-col justify-between hover:border-blue-500/40 transition-all space-y-4 group bg-slate-900/60"
           >
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="px-2.5 py-1 text-[10px] font-bold uppercase bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-full">
+                <span className="px-2.5 py-1 text-[10px] font-bold uppercase bg-blue-600/20 text-blue-400 border border-blue-500/30 rounded-md">
                   {tpl.template_type}
                 </span>
                 <span className="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
@@ -155,10 +154,10 @@ export default function TemplatesPage() {
                 </span>
               </div>
 
-              <h3 className="text-lg font-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+              <h3 className="text-lg font-bold text-white group-hover:text-blue-400 transition-colors mb-2">
                 {tpl.name}
               </h3>
-              <p className="text-xs text-gray-400 line-clamp-2 mb-4 font-mono bg-slate-950/60 p-2.5 rounded-xl border border-white/5">
+              <p className="text-xs text-gray-300 line-clamp-2 mb-4 font-mono bg-slate-950 p-2.5 rounded-xl border border-white/5">
                 Subject: {tpl.subject}
               </p>
               {tpl.description && <p className="text-xs text-gray-400">{tpl.description}</p>}
@@ -168,14 +167,14 @@ export default function TemplatesPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => openPreview(tpl)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-gray-200 transition-colors flex items-center gap-1.5"
+                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-gray-200 transition-colors flex items-center gap-1.5 whitespace-nowrap"
                 >
-                  <Eye className="w-3.5 h-3.5 text-cyan-400" />
+                  <Eye className="w-3.5 h-3.5 text-blue-400" />
                   Preview
                 </button>
                 <button
                   onClick={() => handleDelete(tpl.id, tpl.name)}
-                  className="p-1.5 rounded-xl text-gray-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                  className="p-1.5 rounded-xl text-gray-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors whitespace-nowrap"
                   title="Delete Template"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -184,7 +183,7 @@ export default function TemplatesPage() {
 
               <Link
                 href={`/campaigns?templateId=${tpl.id}`}
-                className="px-3 py-1.5 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 text-purple-300 border border-purple-500/20 text-xs font-bold transition-all flex items-center gap-1.5"
+                className="px-3 py-1.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 border border-blue-500/30 text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap"
               >
                 <Send className="w-3.5 h-3.5" />
                 Use in Campaign
@@ -205,7 +204,7 @@ export default function TemplatesPage() {
         {previewTemplate && (
           <div className="space-y-4">
             <div className="p-3 rounded-xl bg-slate-900 border border-white/10 text-xs text-gray-300 flex items-center justify-between">
-              <span>Category: <strong className="text-purple-400">{previewTemplate.template_type}</strong></span>
+              <span>Category: <strong className="text-blue-400">{previewTemplate.template_type}</strong></span>
               <span className="font-mono text-gray-400 text-[11px]">ID: {previewTemplate.id}</span>
             </div>
 
@@ -219,13 +218,13 @@ export default function TemplatesPage() {
             <div className="pt-4 flex justify-end gap-3">
               <button
                 onClick={() => setPreviewModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 text-xs font-bold text-gray-300 hover:text-white"
+                className="px-4 py-2 rounded-xl bg-slate-800 text-xs font-bold text-gray-300 hover:text-white whitespace-nowrap"
               >
                 Close Preview
               </button>
               <Link
                 href={`/campaigns?templateId=${previewTemplate.id}`}
-                className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-xs font-bold text-white flex items-center gap-2"
+                className="px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-xs font-bold text-white flex items-center gap-2 whitespace-nowrap"
               >
                 <Send className="w-3.5 h-3.5" />
                 Launch Campaign with Template
@@ -317,7 +316,7 @@ export default function TemplatesPage() {
                     type="button"
                     key={v}
                     onClick={() => insertVariable(v)}
-                    className="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 hover:bg-purple-500/20 font-mono text-[10px]"
+                    className="px-2 py-0.5 rounded bg-blue-600/20 text-blue-400 hover:bg-blue-600/30 font-mono text-[10px] whitespace-nowrap"
                   >
                     {`{${v}}`}
                   </button>
@@ -337,7 +336,7 @@ export default function TemplatesPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-sm shadow-lg shadow-purple-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
           >
             {isSubmitting ? 'Saving Template...' : 'Save & Publish Template'}
           </button>
@@ -346,3 +345,4 @@ export default function TemplatesPage() {
     </div>
   )
 }
+

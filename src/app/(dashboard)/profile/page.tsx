@@ -79,7 +79,7 @@ export default function ProfilePage() {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 glass-panel p-6 rounded-3xl border border-white/10">
         <div>
           <h2 className="text-2xl font-extrabold text-white flex items-center gap-3">
-            <UserCheck className="w-6 h-6 text-emerald-400" />
+            <UserCheck className="w-6 h-6 text-blue-400" />
             Account & Business Settings
           </h2>
           <p className="text-xs text-gray-400 mt-1">
@@ -92,7 +92,7 @@ export default function ProfilePage() {
         {/* Profile Form (2 Cols) */}
         <div className="lg:col-span-2 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 space-y-6">
           <h3 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/10 pb-4">
-            <Building className="w-5 h-5 text-emerald-400" />
+            <Building className="w-5 h-5 text-blue-400" />
             Business & Enterprise Identity
           </h3>
 
@@ -230,7 +230,7 @@ export default function ProfilePage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-sm shadow-lg shadow-emerald-500/25 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+              className="w-full py-3.5 px-6 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm transition-all flex items-center justify-center gap-2 disabled:opacity-50 whitespace-nowrap"
             >
               {isLoading ? (
                 <>
@@ -255,27 +255,27 @@ export default function ProfilePage() {
           </h3>
 
           <div className="space-y-4 text-xs">
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2">
+            <div className="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2">
               <p className="text-gray-400 font-semibold uppercase tracking-wider text-[10px]">User Account</p>
               <p className="text-white font-bold text-sm">{user?.name || 'Alex Mercer'}</p>
               <p className="text-gray-300 font-mono">{user?.email || 'alex@leadflow.uk'}</p>
-              <span className="inline-block px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold">
+              <span className="inline-block px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-bold whitespace-nowrap">
                 Active Member
               </span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2">
+            <div className="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2">
               <p className="text-gray-400 font-semibold uppercase tracking-wider text-[10px]">JWT Authentication</p>
               <p className="text-gray-300 font-mono break-all text-[11px]">
                 Bearer Token Active (Valid 30 days)
               </p>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/5 space-y-2">
-              <p className="text-gray-400 font-semibold uppercase tracking-wider text-[10px]">Backend Server Status</p>
+            <div className="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2">
+              <p className="text-gray-400 font-semibold uppercase tracking-wider text-[10px]">Backend Engine Status</p>
               <div className="flex items-center gap-2 text-emerald-400 font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                FastAPI Port 8000 Connected
+                UK Lead API Engine Operational
               </div>
             </div>
           </div>
@@ -284,3 +284,4 @@ export default function ProfilePage() {
     </div>
   )
 }
+
